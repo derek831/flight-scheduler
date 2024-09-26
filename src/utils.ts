@@ -1,8 +1,6 @@
-import type {FlightCapacity, GroupedFlights, OrdersWithFlightInfo} from './types';
-import flights from './data/flights.json';
-import orders from './data/orders.json';
+import type {Flight, FlightCapacity, GroupedFlights, Orders, OrdersWithFlightInfo} from './types';
 
-export function groupFlightsByDay(): GroupedFlights {
+export function groupFlightsByDay(flights: Flight[]): GroupedFlights {
   flights.sort((a, b) => {
     if (a.day === b.day) {
       return a.flight_number - b.flight_number;
@@ -22,7 +20,7 @@ export function groupFlightsByDay(): GroupedFlights {
   return groupedFlights;
 }
 
-export function orderWithFlightData() {
+export function orderWithFlightData(flights: Flight[], orders: Orders) {
   const MAX_ORDERS = 20;
 
   const flightCapacity = flights.reduce((acc, flight) => {
@@ -30,14 +28,14 @@ export function orderWithFlightData() {
       return acc;
   }, {} as FlightCapacity);
 
-  const orderMapping: OrdersWithFlightInfo[] = [];
+  const orderWithFlightInfo: OrdersWithFlightInfo[] = [];
 
   for (const [orderId, order] of Object.entries(orders)) {
-    let assigned = false;
+    let flightHasRoom = false;
 
     for (const flight of flights) {
-      if (flight.arrival_city === order.destination && flightCapacity[flight.flight_number] < MAX_ORDERS) {
-        orderMapping.push({
+      if (flightCapacity[flight.flight_number] < MAX_ORDERS && flight.arrival_city === order.destination ) {
+        orderWithFlightInfo.push({
           order_number: orderId,
           flight_number: flight.flight_number.toString(),
           departure_city: flight.departure_city,
@@ -45,13 +43,13 @@ export function orderWithFlightData() {
           day: flight.day.toString()
         });
         flightCapacity[flight.flight_number]++;
-        assigned = true;
+        flightHasRoom = true;
         break;
       }
     }
 
-    if (!assigned) {
-      orderMapping.push({
+    if (!flightHasRoom) {
+      orderWithFlightInfo.push({
         order_number: orderId,
         flight_number: "",
         departure_city: "",
@@ -61,11 +59,11 @@ export function orderWithFlightData() {
     }
   }
 
-  return orderMapping;
+  return orderWithFlightInfo;
 }
 
-export function filteredOrderByFlight(flight_number: string, day: string) {
-  const allOrders = orderWithFlightData();
+export function filteredOrderByFlight(flight_number: string, day: string, flights: Flight[], orders: Orders) {
+  const allOrders = orderWithFlightData(flights, orders);
 
   return allOrders.filter(order => order.flight_number === flight_number && order.day === day)
 }

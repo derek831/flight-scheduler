@@ -1,17 +1,38 @@
+import { useContext } from "react";
+import { FlightOrderContext } from "../FlightOrderContext";
 import { Page, Text, InlineStack, Button } from "@shopify/polaris";
 import { OrdersTable } from "../components/OrdersTable";
+import { ErrorMessage } from "../components/ErrorMessage";
 import { filteredOrderByFlight } from "../utils";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export function OrdersByFlight() {
   const { flight, day } = useParams();
+  const context = useContext(FlightOrderContext);
 
-  if (!flight || !day) {
-    return <div>Error: Missing flight or day data</div>;
+  if (!context?.flightData) {
+    return <ErrorMessage message="no flight data found" />;
   }
 
-  const orders = filteredOrderByFlight(flight, day);
+  if (!context?.orderData) {
+    return <ErrorMessage message="no order data found" />;
+  }
+
+  if (!flight) {
+    return <ErrorMessage message="no flight number found" />;
+  }
+
+  if (!day) {
+    return <ErrorMessage message="no day found" />;
+  }
+
+  const orders = filteredOrderByFlight(
+    flight,
+    day,
+    context.flightData,
+    context.orderData
+  );
 
   return (
     <Page

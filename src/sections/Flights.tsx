@@ -1,10 +1,19 @@
+import { useContext } from "react";
+import { FlightOrderContext } from "../FlightOrderContext";
 import { Page, BlockStack, Button, InlineStack, Text } from "@shopify/polaris";
 import { Link } from "react-router-dom";
 import { FlightsTable } from "../components/FlightsTable";
+import { ErrorMessage } from "../components/ErrorMessage";
 import { groupFlightsByDay } from "../utils";
 
 export function Flights() {
-  const flightsByDay = groupFlightsByDay();
+  const context = useContext(FlightOrderContext);
+
+  if (!context?.flightData) {
+    return <ErrorMessage message="no flight data found" />;
+  }
+
+  const flightsByDay = groupFlightsByDay(context.flightData);
 
   return (
     <Page

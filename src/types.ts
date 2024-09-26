@@ -5,6 +5,14 @@ export interface Flight {
   day: number;
 }
 
+interface Order {
+  destination: string;
+}
+
+export interface Orders {
+  [key: string]: Order
+}
+
 export interface GroupedFlights {
   [key: number]: Flight[];
 }
