@@ -1,5 +1,6 @@
-import { IndexTable, Text, Button, Link } from "@shopify/polaris";
+import { IndexTable, Text, Button } from "@shopify/polaris";
 import type { Flight } from "../types";
+import { Link } from "react-router-dom";
 
 interface Props {
   flights: Flight[];
@@ -27,7 +28,7 @@ export function FlightsTable({ flights, day }: Props) {
         <IndexTable.Cell>{departure_city}</IndexTable.Cell>
         <IndexTable.Cell>{arrival_city}</IndexTable.Cell>
         <IndexTable.Cell>
-          <Link url={`/flight/${flight_number}/day/${day}`}>
+          <Link to={`/flight/${flight_number}/day/${day}`}>
             <Button>View Flight</Button>
           </Link>
         </IndexTable.Cell>

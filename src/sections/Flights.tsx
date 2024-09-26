@@ -1,12 +1,5 @@
-import {
-  Page,
-  BlockStack,
-  Link,
-  Button,
-  InlineStack,
-  Text,
-} from "@shopify/polaris";
-
+import { Page, BlockStack, Button, InlineStack, Text } from "@shopify/polaris";
+import { Link } from "react-router-dom";
 import { FlightsTable } from "../components/FlightsTable";
 import { groupFlightsByDay } from "../utils";
 
@@ -26,7 +19,7 @@ export function Flights() {
         </InlineStack>
       }
       primaryAction={
-        <Link url="/orders">
+        <Link to="/orders">
           <Button variant="primary">VIEW ORDER SCHEDULE</Button>
         </Link>
       }

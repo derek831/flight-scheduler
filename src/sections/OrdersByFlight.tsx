@@ -1,7 +1,8 @@
-import { Page, Text, InlineStack, Link, Button } from "@shopify/polaris";
+import { Page, Text, InlineStack, Button } from "@shopify/polaris";
 import { OrdersTable } from "../components/OrdersTable";
 import { filteredOrderByFlight } from "../utils";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function OrdersByFlight() {
   const { flight, day } = useParams();
@@ -25,7 +26,7 @@ export function OrdersByFlight() {
         </InlineStack>
       }
       primaryAction={
-        <Link url="/orders">
+        <Link to="/">
           <Button variant="primary">BACK TO FLIGHT SCHEDULE</Button>
         </Link>
       }
