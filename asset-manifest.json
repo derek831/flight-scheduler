@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/flight-scheduler/static/css/main.11e69c08.css",
-    "main.js": "/flight-scheduler/static/js/main.c4ec8f0e.js",
+    "main.js": "/flight-scheduler/static/js/main.a0757c36.js",
     "static/js/453.05c904e7.chunk.js": "/flight-scheduler/static/js/453.05c904e7.chunk.js",
     "index.html": "/flight-scheduler/index.html",
     "main.11e69c08.css.map": "/flight-scheduler/static/css/main.11e69c08.css.map",
-    "main.c4ec8f0e.js.map": "/flight-scheduler/static/js/main.c4ec8f0e.js.map",
+    "main.a0757c36.js.map": "/flight-scheduler/static/js/main.a0757c36.js.map",
     "453.05c904e7.chunk.js.map": "/flight-scheduler/static/js/453.05c904e7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.11e69c08.css",
-    "static/js/main.c4ec8f0e.js"
+    "static/js/main.a0757c36.js"
   ]
 }
