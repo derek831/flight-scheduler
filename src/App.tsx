@@ -1,7 +1,7 @@
 import "@shopify/polaris/build/esm/styles.css";
 import { Flights } from "./sections/Flights";
 import { Orders } from "./sections/Orders";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { OrdersByFlight } from "./sections/OrdersByFlight";
 
 function App() {
